@@ -1,5 +1,5 @@
+//Requiring express to be used
 const express = require("express");
-
 const app = express();
 
 let PORT = process.env.PORT || 3000;
@@ -7,14 +7,14 @@ let PORT = process.env.PORT || 3000;
 //Data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-//Added for styles
+//Added for styles in public
 app.use(express.static("public"));
 
-
-//Routes
+//Routes for server to respond with
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
+//Listening for server
 app.listen(PORT, () => {
-    console.log("Server started on port 3000");
+    console.log("Server started on port" + PORT);
 });

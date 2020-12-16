@@ -4,24 +4,23 @@ const file = './db/db.json';
 
 let savedNotes = [];
 
-//Function for reading the db.json file and adding it to an array
+//Reads the db.json file and updates the savedNotes array
 jsonfile.readFile(file, function (err, obj) {
     if (err) console.error(err);
-    // savedNotes = obj;
-    // console.log(savedNotes);
     for (let i = 0; i < obj.length; i++) {
         savedNotes[i] = { "id": obj[i].id, "title": obj[i].title ,"text": obj[i].text };
     }
 });
 
+//Function that re-writes the db.json file if it needs to be updated for a POST or DELETE request
 function updateJsonFile(savedNotes) {
-   jsonfile.writeFile(file, savedNotes, err => { 
-     
+   jsonfile.writeFile(file, savedNotes, err => {
     if (err) throw err;  
-       //console.log("Done writing"); // Success 
     }); 
 };
 
+
+//Exporting to apiRoutes.js to utilize stored notes in db.json file
 module.exports = { 
     savedNotes: savedNotes,
     updateJsonFile: updateJsonFile

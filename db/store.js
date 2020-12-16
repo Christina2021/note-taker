@@ -1,5 +1,4 @@
 const jsonfile = require('jsonfile');
-const fs = require("fs");
 const file = './db/db.json';
 
 let savedNotes = [];

@@ -1,11 +1,14 @@
+//Receive exported modules from store.js
 let store = require("../db/store");
 
+//Export to server.js
 module.exports = function(app) {
+    //For GET requests, will display current saved notes data
     app.get("/api/notes", function(req, res) {
         res.json(store.savedNotes);
     });
 
-    
+    //for POST requests, will add the note to the savedNotes array, update the db.json file, and the current saved notes will be displayed
     app.post("/api/notes", function(req,res) {
         req.body.id = (store.savedNotes.length + 1).toString();
         store.savedNotes.push(req.body);
@@ -13,7 +16,7 @@ module.exports = function(app) {
         res.json(store.savedNotes);
     })
 
-
+    //for DELETE requests, will remove the note being deleted based on the id of the note using the .filter method; the db.json will be updated, and the current notes will be displayed
     app.delete("/api/notes/:id", function(req, res) {
         var chosen = req.params.id;
       
